@@ -5,6 +5,7 @@ import Features from "./components/Features";
 import Story from "./components/Story";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
+import Threed from "./components/Threed";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Features />
       <Story />
       <Contact />
+      <Threed />
       <Footer />
     </main>
   );

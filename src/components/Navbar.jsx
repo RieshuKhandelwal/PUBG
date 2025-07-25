@@ -62,6 +62,25 @@ const NavBar = () => {
     });
   }, [isNavVisible]);
 
+  useEffect(() => {
+    function handlePauseMusic() {
+      if (audioElementRef.current) {
+        audioElementRef.current.pause();
+      }
+    }
+    function handlePlayMusic() {
+      if (isAudioPlaying && audioElementRef.current) {
+        audioElementRef.current.play();
+      }
+    }
+    window.addEventListener('pause-music', handlePauseMusic);
+    window.addEventListener('play-music', handlePlayMusic);
+    return () => {
+      window.removeEventListener('pause-music', handlePauseMusic);
+      window.removeEventListener('play-music', handlePlayMusic);
+    };
+  }, [isAudioPlaying]);
+
   return (
     <div
       ref={navContainerRef}
