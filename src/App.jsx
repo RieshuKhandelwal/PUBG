@@ -16,7 +16,6 @@ function App() {
       <Features />
       <Story />
       <Contact />
-      <Threed />
       <Footer />
     </main>
   );
