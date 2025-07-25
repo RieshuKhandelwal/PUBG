@@ -82,8 +82,6 @@ src/
 ## 📦 Assets & Credits
 
 - **Assets:** All images, videos, and fonts are for educational/demo use only. Replace with your own for production.
-- **Design Inspiration:** [Zentry](https://zentry.com/)
-- **Tutorial:** Built following [JavaScript Mastery](https://www.youtube.com/@javascriptmastery/videos)
 
 ---
 
