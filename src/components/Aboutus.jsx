@@ -8,7 +8,7 @@ gsap.registerPlugin(ScrollTrigger);
 const DESIGN = [
   {
     id: "land",
-    backgroundVideo: "https://wstatic-prod.pubg.com/web/live/main_ec97e50/videos/video-scene1-1.8accb32.mp4",
+    backgroundVideo: "/videos/land.mp4",
     title: "LAND",
     subtitle: "Drop into unknown battlegrounds",
     animation: {
@@ -19,7 +19,7 @@ const DESIGN = [
   },
   {
     id: "loot",
-    backgroundVideo: "https://wstatic-prod.pubg.com/web/live/main_ec97e50/videos/video-scene2-3.9448e40.mp4",
+    backgroundVideo: "/videos/loot.mp4",
     title: "LOOT",
     subtitle: "Gear up with weapons & items",
     animation: {
@@ -30,7 +30,7 @@ const DESIGN = [
   },
   {
     id: "fight",
-    backgroundVideo: "https://wstatic-prod.pubg.com/web/live/main_ec97e50/videos/video-scene3-1.1eca88f.mp4",
+    backgroundVideo: "/videos/fight.mp4",
     title: "FIGHT",
     images: [
       "https://wstatic-prod.pubg.com/web/live/main_ec97e50/img/4537ba9.webp",
@@ -44,7 +44,7 @@ const DESIGN = [
   },
   {
     id: "survive",
-    backgroundVideo: "https://wstatic-prod.pubg.com/web/live/main_ec97e50/videos/video-scene3-3.63147a4.mp4",
+    backgroundVideo: "/videos/survive.mp4",
     title: "SURVIVE",
     subtitle: "Be the last one standing",
     animation: {
