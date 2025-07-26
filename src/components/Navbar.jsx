@@ -3,10 +3,16 @@ import gsap from "gsap";
 import { useWindowScroll } from "react-use";
 import { useEffect, useRef, useState } from "react";
 import { TiLocationArrow } from "react-icons/ti";
+import { Link, useNavigate } from "react-router-dom";
 
 import Button from "./Button";
 
-const navItems = ["Nexus", "Vault", "Prologue", "About", "Contact"];
+// Use anchor links for sections, route for About-Us and Register
+const navItems = [
+  { label: "Products", path: "/products" },
+  { label: "About-Us", path: "/aboutus" },
+  { label: "Register", path: "/register" },
+];
 
 const NavBar = () => {
   // State for toggling audio and visual indicator
@@ -20,6 +26,8 @@ const NavBar = () => {
   const { y: currentScrollY } = useWindowScroll();
   const [isNavVisible, setIsNavVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+
+  const navigate = useNavigate();
 
   // Toggle audio and visual indicator
   const toggleAudioIndicator = () => {
@@ -90,13 +98,16 @@ const NavBar = () => {
         <nav className="flex size-full items-center justify-between p-4">
           {/* Logo and Product button */}
           <div className="flex items-center gap-7">
-            <img src="/img/logo.png" alt="logo" className="w-16" />
+            <Link to="/">
+              <img src="/img/logo.png" alt="logo" className="w-16" />
+            </Link>
 
             <Button
               id="product-button"
-              title="Products"
+              title="Home"
               rightIcon={<TiLocationArrow />}
               containerClass="bg-blue-50 md:flex hidden items-center justify-center gap-1"
+              onClick={() => navigate("/")}
             />
           </div>
 
@@ -104,13 +115,13 @@ const NavBar = () => {
           <div className="flex h-full items-center">
             <div className="hidden md:block">
               {navItems.map((item, index) => (
-                <a
+                <Link
                   key={index}
-                  href={`#${item.toLowerCase()}`}
+                  to={item.path}
                   className="nav-hover-btn"
                 >
-                  {item}
-                </a>
+                  {item.label}
+                </Link>
               ))}
             </div>
 

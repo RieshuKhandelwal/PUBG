@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 
 // 3D Card effect component
-function Card3D({ children, className = "", ...props }) {
+export function Card3D({ children, className = "", ...props }) {
   const cardRef = useRef(null);
 
   // Mouse move handler for 3D tilt
