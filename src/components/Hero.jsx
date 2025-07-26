@@ -196,7 +196,7 @@ const Hero = () => {
           <div
             className="absolute left-0 top-0 size-full z-30 bg-cover bg-center bg-no-repeat transition-opacity duration-500"
             style={{
-              backgroundImage: `url('/placeholder.svg?height=1080&width=1920')`,
+              backgroundImage: `url('/img/herobg.webp')`,
               opacity: showBackgroundImage ? 1 : 0,
             }}
           />
@@ -274,6 +274,7 @@ const Hero = () => {
               title="Watch trailer"
               leftIcon={<TiLocationArrow />}
               containerClass="bg-yellow-300 flex-center gap-1"
+              onClick={() => window.open("https://www.youtube.com/watch?v=SFafi7eln9w", "_blank")}
             />
           </div>
         </div>
