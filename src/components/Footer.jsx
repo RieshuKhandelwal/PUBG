@@ -4,6 +4,7 @@ import { useRef, useEffect } from "react"
 import { FaDiscord, FaTwitter, FaYoutube, FaFacebook } from "react-icons/fa"
 import { Link } from "react-router-dom"
 import gsap from "gsap"
+import { soundManager } from "../utils/soundManager"
 
 const socialLinks = [
   { href: "https://discord.com/invite/battlegrounds", icon: <FaDiscord />, color: "#5865F2", name: "Discord" },
@@ -21,7 +22,6 @@ const Footer = () => {
   const socialIconsRef = useRef([])
 
   useEffect(() => {
-    // Initial entrance animation for social icons
     gsap.fromTo(
       socialIconsRef.current,
       {
@@ -46,7 +46,8 @@ const Footer = () => {
     if (!icon) return
 
     if (isEntering) {
-      // INTENSIVE scale up and glow effect
+      soundManager.play("uiPop")
+
       gsap.to(icon, {
         scale: 1.8,
         rotation: 15,
@@ -55,14 +56,12 @@ const Footer = () => {
         ease: "back.out(2)",
       })
 
-      // Dynamic glow effect with brand color
       gsap.to(icon, {
         filter: `drop-shadow(0 0 20px ${color}) drop-shadow(0 0 40px ${color}) drop-shadow(0 0 60px ${color}80)`,
         duration: 0.3,
         ease: "power2.out",
       })
 
-      // Pulsing animation
       gsap.to(icon, {
         scale: 2,
         duration: 0.6,
@@ -72,8 +71,7 @@ const Footer = () => {
         delay: 0.2,
       })
     } else {
-      // Reset to normal state
-      gsap.killTweensOf(icon) // Stop all animations
+      gsap.killTweensOf(icon)
       gsap.to(icon, {
         scale: 1,
         rotation: 0,
@@ -89,7 +87,8 @@ const Footer = () => {
     const icon = socialIconsRef.current[index]
     if (!icon) return
 
-    // Explosive click animation
+    soundManager.play("sciFi4")
+
     gsap.to(icon, {
       scale: 0.7,
       duration: 0.1,
@@ -99,9 +98,16 @@ const Footer = () => {
     })
   }
 
+  const handlePrivacyHover = () => {
+    soundManager.play("uiPop")
+  }
+
+  const handlePrivacyClick = () => {
+    soundManager.play("sciFi4")
+  }
+
   return (
     <footer className="w-screen bg-[#5542ff] py-4 text-black relative overflow-hidden">
-      {/* Background particles for extra gaming feel */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-2 left-10 w-1 h-1 bg-white/20 rounded-full animate-pulse"></div>
         <div
@@ -147,6 +153,8 @@ const Footer = () => {
         <Link
           to="/privacy-policy"
           className="text-center text-sm font-light hover:underline md:text-right transition-all duration-300 hover:text-white hover:scale-105"
+          onMouseEnter={handlePrivacyHover}
+          onClick={handlePrivacyClick}
         >
           Privacy Policy
         </Link>

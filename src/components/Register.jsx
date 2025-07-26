@@ -2,6 +2,7 @@
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import { soundManager } from "../utils/soundManager"
 
 export default function Register() {
   const [isLogin, setIsLogin] = useState(true);
@@ -61,7 +62,11 @@ export default function Register() {
               />
               <button
                 className="w-full bg-yellow-500 hover:bg-yellow-600 transition p-2 rounded font-bold"
-                onClick={() => navigate("/")}
+                onMouseEnter={() => soundManager.play("button")}
+                onClick={() => {
+                  soundManager.play("sciFi4")
+                  navigate("/")
+                }}
               >
                 Log In
               </button>
@@ -96,7 +101,11 @@ export default function Register() {
               />
               <button
                 className="w-full bg-yellow-500 hover:bg-yellow-600 transition p-2 rounded font-bold"
-                onClick={() => setIsLogin(true)}
+                onMouseEnter={() => soundManager.play("button")}
+                onClick={() => {
+                  soundManager.play("sciFi4")
+                  setIsLogin(true)
+                }}
               >
                 Sign Up
               </button>

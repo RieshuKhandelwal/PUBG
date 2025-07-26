@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import { TiLocationArrow } from "react-icons/ti";
+import { soundManager } from "../utils/soundManager"
 
 export const BentoTilt = ({ children, className = "" }) => {
   const [transformStyle, setTransformStyle] = useState("");
@@ -106,8 +107,16 @@ export const BentoCard = ({ src, title, description, isComingSoon, parallax = { 
     });
   };
 
-  const handleMouseEnter = () => setHoverOpacity(1);
-  const handleMouseLeave = () => setHoverOpacity(0);
+  const handleButtonMouseEnter = () => {
+    setHoverOpacity(1)
+    soundManager.play("button")
+  }
+
+  const handleButtonMouseLeave = () => setHoverOpacity(0)
+
+  const handleButtonClick = () => {
+    soundManager.play("sciFi4")
+  }
 
   const handleCardMouseEnter = () => {
     setIsHovered(true);
@@ -182,8 +191,9 @@ export const BentoCard = ({ src, title, description, isComingSoon, parallax = { 
           <div
             ref={hoverButtonRef}
             onMouseMove={handleMouseMove}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
+            onMouseEnter={handleButtonMouseEnter}
+            onMouseLeave={handleButtonMouseLeave}
+            onClick={handleButtonClick}
             className="border-hsla relative flex w-fit cursor-pointer items-center gap-1 overflow-hidden rounded-full bg-black px-5 py-2 text-xs uppercase text-white/20 transition-all duration-300"
             style={{
               boxShadow: isHovered

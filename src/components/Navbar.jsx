@@ -7,6 +7,7 @@ import { useEffect, useRef, useState } from "react"
 import { TiLocationArrow } from "react-icons/ti"
 import { HiVolumeUp, HiVolumeOff } from "react-icons/hi"
 import { Link, useNavigate } from "react-router-dom"
+import { soundManager } from "../utils/soundManager"
 
 import Button from "./Button"
 
@@ -39,8 +40,16 @@ const NavBar = () => {
 
   // Toggle audio and visual indicator
   const toggleAudioIndicator = () => {
-    setIsAudioPlaying((prev) => !prev)
-    setIsIndicatorActive((prev) => !prev)
+    const newAudioState = !isAudioPlaying
+    setIsAudioPlaying(newAudioState)
+    setIsIndicatorActive(newAudioState)
+
+    // Enable/disable UI sounds based on main audio state
+    if (newAudioState) {
+      soundManager.enable()
+    } else {
+      soundManager.disable()
+    }
 
     // Intense click animation
     gsap.to(audioButtonRef.current, {
@@ -145,15 +154,12 @@ const NavBar = () => {
 
   useEffect(() => {
     if (currentScrollY === 0) {
-      // Topmost position: show navbar without floating-nav
       setIsNavVisible(true)
       navContainerRef.current.classList.remove("floating-nav")
     } else if (currentScrollY > lastScrollY) {
-      // Scrolling down: hide navbar and apply floating-nav
       setIsNavVisible(false)
       navContainerRef.current.classList.add("floating-nav")
     } else if (currentScrollY < lastScrollY) {
-      // Scrolling up: show navbar with floating-nav
       setIsNavVisible(true)
       navContainerRef.current.classList.add("floating-nav")
     }
@@ -195,39 +201,40 @@ const NavBar = () => {
     if (!link) return
 
     if (isEntering) {
+      // Play UI sound
+      soundManager.play("button")
+
       gsap.to(link, {
         scale: 1.3,
         y: -8,
-        color: "#fb923c", // PUBG orange
+        color: "#fb923c",
         textShadow: "0 0 20px rgba(251, 146, 60, 0.8), 0 0 40px rgba(251, 146, 60, 0.4)",
         rotation: 2,
         duration: 0.4,
         ease: "back.out(1.7)",
       })
 
-      // Animate individual letters
       const letters = link.querySelectorAll("span")
       letters.forEach((letter, letterIndex) => {
         gsap.to(letter, {
-          y: -3,
+          y: -5,
           scale: 1.2,
           duration: 0.3,
-          delay: letterIndex * 0.01,
-          ease: "back.out(1.1)",
+          delay: letterIndex * 0.05,
+          ease: "back.out(1.7)",
         })
       })
     } else {
       gsap.to(link, {
         scale: 1,
         y: 0,
-        color: "#dbeafe", // Original blue-50
+        color: "#dbeafe",
         textShadow: "none",
         rotation: 0,
         duration: 0.4,
         ease: "power2.out",
       })
 
-      // Reset individual letters
       const letters = link.querySelectorAll("span")
       letters.forEach((letter) => {
         gsap.to(letter, {
@@ -243,6 +250,7 @@ const NavBar = () => {
   // EXPLOSIVE logo hover animation
   const handleLogoHover = (isEntering) => {
     if (isEntering) {
+      soundManager.play("uiPop")
       gsap.to(logoRef.current, {
         scale: 1.4,
         rotation: 15,
@@ -266,6 +274,7 @@ const NavBar = () => {
   // POWERFUL Home button hover animation
   const handleHomeButtonHover = (isEntering) => {
     if (isEntering) {
+      soundManager.play("button")
       gsap.to(homeButtonRef.current, {
         scale: 1.2,
         y: -3,
@@ -290,6 +299,7 @@ const NavBar = () => {
   const handleAudioButtonHover = (isEntering) => {
     if (isEntering) {
       setShowTooltip(true)
+      soundManager.play("sciFi4")
       gsap.to(audioButtonRef.current, {
         scale: 1.3,
         rotation: 10,
@@ -309,6 +319,17 @@ const NavBar = () => {
     }
   }
 
+  // Handle nav link clicks
+  const handleNavLinkClick = () => {
+    soundManager.play("sciFi4")
+  }
+
+  // Handle home button click
+  const handleHomeButtonClick = () => {
+    soundManager.play("synthShot")
+    navigate("/")
+  }
+
   return (
     <div
       ref={navContainerRef}
@@ -318,7 +339,7 @@ const NavBar = () => {
         <nav className="flex size-full items-center justify-between p-4">
           {/* Logo and Product button */}
           <div className="flex items-center gap-7">
-            <Link to="/">
+            <Link to="/" onClick={handleNavLinkClick}>
               <img
                 ref={logoRef}
                 src="/img/logo.png"
@@ -335,7 +356,7 @@ const NavBar = () => {
                 title="Home"
                 rightIcon={<TiLocationArrow />}
                 containerClass="bg-gradient-to-r from-blue-400 to-cyan-500 hover:from-blue-300 hover:to-cyan-400 md:flex hidden items-center justify-center gap-1 transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-blue-400/30 text-white font-semibold"
-                onClick={() => navigate("/")}
+                onClick={handleHomeButtonClick}
                 onMouseEnter={() => handleHomeButtonHover(true)}
                 onMouseLeave={() => handleHomeButtonHover(false)}
               />
@@ -353,6 +374,7 @@ const NavBar = () => {
                   className="nav-hover-btn transition-all duration-300 relative overflow-hidden"
                   onMouseEnter={() => handleNavLinkHover(index, true)}
                   onMouseLeave={() => handleNavLinkHover(index, false)}
+                  onClick={handleNavLinkClick}
                 >
                   {item.label.split("").map((letter, letterIndex) => (
                     <span
@@ -409,7 +431,7 @@ const NavBar = () => {
               {showTooltip && (
                 <div className="absolute -bottom-12 left-1/2 transform -translate-x-1/2 bg-black/90 text-white text-xs px-3 py-2 rounded-lg whitespace-nowrap backdrop-blur-sm border border-orange-400/20">
                   <div className="absolute -top-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-black/90 rotate-45 border-l border-t border-orange-400/20"></div>
-                  {isAudioPlaying ? "🔊 Music Playing" : "🔇 Click for Music"}
+                  {isAudioPlaying ? "🔊 Audio & UI Sounds ON" : "🔇 Click to Enable Audio & Sounds"}
                 </div>
               )}
             </div>

@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { soundManager } from "../utils/soundManager";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -130,9 +131,13 @@ export default function Products() {
 
                 <p className="text-lg font-bold text-yellow-400">{pass.price}</p>
 
-                <div className="mt-4 w-full bg-yellow-500 hover:bg-yellow-400 text-black font-bold py-2 rounded text-center transition-colors">
+                <div 
+                  className="mt-4 w-full bg-yellow-500 hover:bg-yellow-400 text-black font-bold py-2 rounded text-center transition-colors"
+                  onMouseEnter={() => soundManager.play("button")}
+                  onClick={() => soundManager.play("sciFi4")}
+                >
                   View Details →
-                </div>
+              </div>
               </div>
             </div>
           </Link>

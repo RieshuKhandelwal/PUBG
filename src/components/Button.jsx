@@ -1,30 +1,38 @@
-import clsx from "clsx";
+"use client"
 
-const Button = ({ id, title, rightIcon, leftIcon, containerClass, onClick }) => {
+import { soundManager } from "../utils/soundManager"
+
+// Simple utility function to combine classes
+const cn = (...classes) => {
+  return classes.filter(Boolean).join(" ")
+}
+
+const Button = ({ id, title, leftIcon, rightIcon, containerClass, onClick, ...props }) => {
+  const handleMouseEnter = () => {
+    soundManager.play("button")
+  }
+
+  const handleClick = (e) => {
+    soundManager.play("sciFi4")
+    if (onClick) onClick(e)
+  }
+
   return (
     <button
       id={id}
-      className={clsx(
-        "group relative z-10 w-fit cursor-pointer overflow-hidden rounded-full bg-violet-50 px-7 py-3 text-black",
-        containerClass
+      className={cn(
+        "group relative z-10 w-fit cursor-pointer overflow-hidden rounded-full px-7 py-3 text-black transition-all duration-300 ease-in-out hover:scale-105",
+        containerClass,
       )}
-      onClick={onClick}
-      type="button"
+      onClick={handleClick}
+      onMouseEnter={handleMouseEnter}
+      {...props}
     >
-      {leftIcon}
-
-      <span className="relative inline-flex overflow-hidden font-general text-xs uppercase">
-        <div className="translate-y-0 skew-y-0 transition duration-500 group-hover:translate-y-[-160%] group-hover:skew-y-12">
-          {title}
-        </div>
-        <div className="absolute translate-y-[164%] skew-y-12 transition duration-500 group-hover:translate-y-0 group-hover:skew-y-0">
-          {title}
-        </div>
-      </span>
-
-      {rightIcon}
+      {leftIcon && <span className="relative inline-flex shrink-0 overflow-hidden text-xs">{leftIcon}</span>}
+      {title && <span className="relative incline-flex overflow-hidden font-general text-xs uppercase">{title}</span>}
+      {rightIcon && <span className="relative inline-flex shrink-0 overflow-hidden text-xs">{rightIcon}</span>}
     </button>
-  );
-};
+  )
+}
 
-export default Button;
+export default Button
