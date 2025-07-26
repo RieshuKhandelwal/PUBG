@@ -45,6 +45,10 @@ const FloatingImage = () => {
     }
   };
 
+  const handleDiscoverPrologue = () => {
+    window.open("https://www.youtube.com/watch?v=YVpT0PmLghs", "_blank")
+  }
+
   return (
     <div id="story" className="min-h-dvh w-screen bg-black text-blue-50">
       <div className="flex size-full flex-col items-center py-10 pb-24">
@@ -113,7 +117,8 @@ const FloatingImage = () => {
             <Button
               id="realm-btn"
               title="discover prologue"
-              containerClass="mt-5"
+              containerClass="mt-5 bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-300 hover:to-orange-400 flex-center gap-1 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+              onClick={handleDiscoverPrologue}
             />
           </div>
         </div>

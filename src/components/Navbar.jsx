@@ -5,6 +5,7 @@ import gsap from "gsap"
 import { useWindowScroll } from "react-use"
 import { useEffect, useRef, useState } from "react"
 import { TiLocationArrow } from "react-icons/ti"
+import { HiVolumeUp, HiVolumeOff } from "react-icons/hi"
 import { Link, useNavigate } from "react-router-dom"
 
 import Button from "./Button"
@@ -20,6 +21,7 @@ const NavBar = () => {
   // State for toggling audio and visual indicator
   const [isAudioPlaying, setIsAudioPlaying] = useState(false)
   const [isIndicatorActive, setIsIndicatorActive] = useState(false)
+  const [showTooltip, setShowTooltip] = useState(false)
 
   // Refs for audio and navigation container
   const audioElementRef = useRef(null)
@@ -27,6 +29,7 @@ const NavBar = () => {
   const logoRef = useRef(null)
   const homeButtonRef = useRef(null)
   const navLinksRef = useRef([])
+  const audioButtonRef = useRef(null)
 
   const { y: currentScrollY } = useWindowScroll()
   const [isNavVisible, setIsNavVisible] = useState(true)
@@ -38,6 +41,15 @@ const NavBar = () => {
   const toggleAudioIndicator = () => {
     setIsAudioPlaying((prev) => !prev)
     setIsIndicatorActive((prev) => !prev)
+
+    // Intense click animation
+    gsap.to(audioButtonRef.current, {
+      scale: 0.8,
+      duration: 0.1,
+      yoyo: true,
+      repeat: 1,
+      ease: "power2.inOut",
+    })
   }
 
   // Manage audio playback
@@ -49,58 +61,84 @@ const NavBar = () => {
     }
   }, [isAudioPlaying])
 
-  // Initial animations when component mounts
+  // INTENSE Initial animations when component mounts
   useEffect(() => {
-    // Animate logo entrance
+    // EXPLOSIVE logo entrance
     gsap.fromTo(
       logoRef.current,
       {
         scale: 0,
-        rotation: -180,
+        rotation: -360,
+        opacity: 0,
+        y: -100,
+      },
+      {
+        scale: 1,
+        rotation: 0,
+        opacity: 1,
+        y: 0,
+        duration: 1.8,
+        ease: "elastic.out(1, 0.5)",
+        delay: 0.2,
+      },
+    )
+
+    // POWERFUL Home button entrance
+    gsap.fromTo(
+      homeButtonRef.current,
+      {
+        x: -200,
+        opacity: 0,
+        scale: 0.5,
+        rotation: -45,
+      },
+      {
+        x: 0,
+        opacity: 1,
+        scale: 1,
+        rotation: 0,
+        duration: 1.2,
+        ease: "back.out(2)",
+        delay: 0.5,
+      },
+    )
+
+    // DRAMATIC navigation links with intense stagger
+    gsap.fromTo(
+      navLinksRef.current,
+      {
+        y: -100,
+        opacity: 0,
+        rotationX: -180,
+        scale: 0.3,
+      },
+      {
+        y: 0,
+        opacity: 1,
+        rotationX: 0,
+        scale: 1,
+        duration: 1,
+        stagger: 0.15,
+        ease: "back.out(2.5)",
+        delay: 0.8,
+      },
+    )
+
+    // Audio button dramatic entrance
+    gsap.fromTo(
+      audioButtonRef.current,
+      {
+        scale: 0,
+        rotation: 180,
         opacity: 0,
       },
       {
         scale: 1,
         rotation: 0,
         opacity: 1,
-        duration: 1.2,
+        duration: 1,
         ease: "back.out(1.7)",
-        delay: 0.2,
-      },
-    )
-
-    // Animate Home button
-    gsap.fromTo(
-      homeButtonRef.current,
-      {
-        x: -100,
-        opacity: 0,
-      },
-      {
-        x: 0,
-        opacity: 1,
-        duration: 0.8,
-        ease: "power2.out",
-        delay: 0.5,
-      },
-    )
-
-    // Animate navigation links with stagger
-    gsap.fromTo(
-      navLinksRef.current,
-      {
-        y: -50,
-        opacity: 0,
-        rotationX: -90,
-      },
-      {
-        y: 0,
-        opacity: 1,
-        rotationX: 0,
-        duration: 0.6,
-        stagger: 0.1,
-        ease: "back.out(1.7)",
-        delay: 0.8,
+        delay: 1.2,
       },
     )
   }, [])
@@ -127,7 +165,8 @@ const NavBar = () => {
     gsap.to(navContainerRef.current, {
       y: isNavVisible ? 0 : -100,
       opacity: isNavVisible ? 1 : 0,
-      duration: 0.2,
+      duration: 0.4,
+      ease: "power2.out",
     })
   }, [isNavVisible])
 
@@ -150,64 +189,120 @@ const NavBar = () => {
     }
   }, [isAudioPlaying])
 
-  // Enhanced hover animations for nav links
+  // INTENSE hover animations for nav links
   const handleNavLinkHover = (index, isEntering) => {
     const link = navLinksRef.current[index]
     if (!link) return
 
     if (isEntering) {
       gsap.to(link, {
-        scale: 1.1,
+        scale: 1.3,
+        y: -8,
         color: "#fb923c", // PUBG orange
-        textShadow: "0 0 10px rgba(251, 146, 60, 0.5)",
-        duration: 0.3,
-        ease: "power2.out",
+        textShadow: "0 0 20px rgba(251, 146, 60, 0.8), 0 0 40px rgba(251, 146, 60, 0.4)",
+        rotation: 2,
+        duration: 0.4,
+        ease: "back.out(1.7)",
+      })
+
+      // Animate individual letters
+      const letters = link.querySelectorAll("span")
+      letters.forEach((letter, letterIndex) => {
+        gsap.to(letter, {
+          y: -3,
+          scale: 1.2,
+          duration: 0.3,
+          delay: letterIndex * 0.01,
+          ease: "back.out(1.1)",
+        })
       })
     } else {
       gsap.to(link, {
         scale: 1,
+        y: 0,
         color: "#dbeafe", // Original blue-50
         textShadow: "none",
-        duration: 0.3,
+        rotation: 0,
+        duration: 0.4,
         ease: "power2.out",
+      })
+
+      // Reset individual letters
+      const letters = link.querySelectorAll("span")
+      letters.forEach((letter) => {
+        gsap.to(letter, {
+          y: 0,
+          scale: 1,
+          duration: 0.3,
+          ease: "power2.out",
+        })
       })
     }
   }
 
-  // Logo hover animation
+  // EXPLOSIVE logo hover animation
   const handleLogoHover = (isEntering) => {
     if (isEntering) {
       gsap.to(logoRef.current, {
-        scale: 1.1,
-        rotation: 5,
-        filter: "drop-shadow(0 0 10px rgba(251, 146, 60, 0.6))",
-        duration: 0.3,
-        ease: "power2.out",
+        scale: 1.4,
+        rotation: 15,
+        filter: "drop-shadow(0 0 25px rgba(251, 146, 60, 0.9)) drop-shadow(0 0 50px rgba(251, 146, 60, 0.5))",
+        y: -5,
+        duration: 0.5,
+        ease: "back.out(1.7)",
       })
     } else {
       gsap.to(logoRef.current, {
         scale: 1,
         rotation: 0,
         filter: "none",
-        duration: 0.3,
+        y: 0,
+        duration: 0.5,
         ease: "power2.out",
       })
     }
   }
 
-  // Home button hover animation
+  // POWERFUL Home button hover animation
   const handleHomeButtonHover = (isEntering) => {
     if (isEntering) {
       gsap.to(homeButtonRef.current, {
-        scale: 1.05,
-        boxShadow: "0 0 20px rgba(251, 146, 60, 0.4)",
-        duration: 0.3,
-        ease: "power2.out",
+        scale: 1.2,
+        y: -3,
+        boxShadow: "0 10px 30px rgba(251, 146, 60, 0.6), 0 0 0 3px rgba(251, 146, 60, 0.3)",
+        filter: "brightness(1.2)",
+        duration: 0.4,
+        ease: "back.out(1.7)",
       })
     } else {
       gsap.to(homeButtonRef.current, {
         scale: 1,
+        y: 0,
         boxShadow: "none",
+        filter: "brightness(1)",
+        duration: 0.4,
+        ease: "power2.out",
+      })
+    }
+  }
+
+  // INTENSE Audio button hover animation
+  const handleAudioButtonHover = (isEntering) => {
+    if (isEntering) {
+      setShowTooltip(true)
+      gsap.to(audioButtonRef.current, {
+        scale: 1.3,
+        rotation: 10,
+        filter: "drop-shadow(0 0 15px rgba(251, 146, 60, 0.7))",
+        duration: 0.3,
+        ease: "back.out(1.7)",
+      })
+    } else {
+      setShowTooltip(false)
+      gsap.to(audioButtonRef.current, {
+        scale: 1,
+        rotation: 0,
+        filter: "none",
         duration: 0.3,
         ease: "power2.out",
       })
@@ -239,7 +334,7 @@ const NavBar = () => {
                 id="product-button"
                 title="Home"
                 rightIcon={<TiLocationArrow />}
-                containerClass="bg-gradient-to-r from-cyan-700 via-blue-800 to-cyan-700 hover:from-blue-300 hover:to-cyan-400 md:flex hidden items-center justify-center gap-1 transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-blue-400/30 text-white font-semibold"
+                containerClass="bg-gradient-to-r from-blue-400 to-cyan-500 hover:from-blue-300 hover:to-cyan-400 md:flex hidden items-center justify-center gap-1 transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-blue-400/30 text-white font-semibold"
                 onClick={() => navigate("/")}
                 onMouseEnter={() => handleHomeButtonHover(true)}
                 onMouseLeave={() => handleHomeButtonHover(false)}
@@ -255,7 +350,7 @@ const NavBar = () => {
                   key={index}
                   ref={(el) => (navLinksRef.current[index] = el)}
                   to={item.path}
-                  className="nav-hover-btn transition-all duration-300"
+                  className="nav-hover-btn transition-all duration-300 relative overflow-hidden"
                   onMouseEnter={() => handleNavLinkHover(index, true)}
                   onMouseLeave={() => handleNavLinkHover(index, false)}
                 >
@@ -274,23 +369,50 @@ const NavBar = () => {
               ))}
             </div>
 
-            <button
-              onClick={toggleAudioIndicator}
-              className="ml-10 flex items-center space-x-0.5 transition-all duration-300 hover:scale-110"
-            >
-              <audio ref={audioElementRef} className="hidden" src="/audio/loop.mp3" loop />
-              {[1, 2, 3, 4].map((bar) => (
-                <div
-                  key={bar}
-                  className={clsx("indicator-line transition-all duration-300", {
-                    active: isIndicatorActive,
-                  })}
-                  style={{
-                    animationDelay: `${bar * 0.1}s`,
-                  }}
-                />
-              ))}
-            </button>
+            {/* Enhanced Audio Button with Sound Icon and Tooltip */}
+            <div className="relative ml-10">
+              <button
+                ref={audioButtonRef}
+                onClick={toggleAudioIndicator}
+                className="flex items-center space-x-2 transition-all duration-300 p-2 rounded-full hover:bg-orange-400/10"
+                onMouseEnter={() => handleAudioButtonHover(true)}
+                onMouseLeave={() => handleAudioButtonHover(false)}
+              >
+                <audio ref={audioElementRef} className="hidden" src="/audio/loop.mp3" loop />
+
+                {/* Sound Icon */}
+                <div className="flex items-center space-x-1">
+                  {isAudioPlaying ? (
+                    <HiVolumeUp className="text-orange-400 text-xl" />
+                  ) : (
+                    <HiVolumeOff className="text-blue-50 text-xl" />
+                  )}
+
+                  {/* Visual Indicator Bars */}
+                  <div className="flex items-center space-x-0.5">
+                    {[1, 2, 3, 4].map((bar) => (
+                      <div
+                        key={bar}
+                        className={clsx("indicator-line transition-all duration-300", {
+                          active: isIndicatorActive,
+                        })}
+                        style={{
+                          animationDelay: `${bar * 0.1}s`,
+                        }}
+                      />
+                    ))}
+                  </div>
+                </div>
+              </button>
+
+              {/* Tooltip */}
+              {showTooltip && (
+                <div className="absolute -bottom-12 left-1/2 transform -translate-x-1/2 bg-black/90 text-white text-xs px-3 py-2 rounded-lg whitespace-nowrap backdrop-blur-sm border border-orange-400/20">
+                  <div className="absolute -top-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-black/90 rotate-45 border-l border-t border-orange-400/20"></div>
+                  {isAudioPlaying ? "🔊 Music Playing" : "🔇 Click for Music"}
+                </div>
+              )}
+            </div>
           </div>
         </nav>
       </header>

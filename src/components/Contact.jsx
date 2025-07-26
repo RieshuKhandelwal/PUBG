@@ -43,7 +43,8 @@ const Contact = () => {
             className="special-font !md:text-[6.2rem] w-full font-zentry !text-5xl !font-black !leading-[.9]"
           />
 
-          <Button title="contact us" containerClass="mt-10 cursor-pointer" />
+          <Button title="contact us" containerClass=" mt-10 bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-300 hover:to-orange-400 flex-center gap-1 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+              onClick={() => window.open("https://support.pubg.com/hc/en-us", "_blank")} />
         </div>
       </div>
     </div>
