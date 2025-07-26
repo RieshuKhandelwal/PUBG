@@ -261,7 +261,7 @@ const Hero = () => {
 
         <div className="absolute left-0 top-0 z-40 size-full">
           <div className="mt-24 px-5 sm:px-10">
-            <h1 className="special-font hero-heading text-blue-100">
+            <h1 className="special-font hero-heading text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-yellow-500 to-blue-500">
               redefi<b>n</b>e
             </h1>
 
@@ -273,14 +273,14 @@ const Hero = () => {
               id="watch-trailer"
               title="Watch trailer"
               leftIcon={<TiLocationArrow />}
-              containerClass="bg-yellow-300 flex-center gap-1"
+              containerClass="bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-300 hover:to-orange-400 flex-center gap-1 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
               onClick={() => window.open("https://www.youtube.com/watch?v=SFafi7eln9w", "_blank")}
             />
           </div>
         </div>
       </div>
 
-      <h1 className="special-font hero-heading absolute bottom-5 right-5 text-black">
+      <h1 className="special-font hero-heading absolute bottom-5 right-5 z-40 text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-yellow-500 to-blue-500">
         G<b>A</b>MING
       </h1>
     </div>
