@@ -11,6 +11,15 @@
 
 ---
 
+## 🚀 Live Demo & Article
+- **🌐 Live Website:** [pubg-phi.vercel.app](https://pubg-phi.vercel.app/)
+
+- **📄 LinkedIn Article (with Demo Video):** https://www.linkedin.com/pulse/pubgthemedwebsite-rishu-khandelwal-tof0c 
+
+PUBG-themed website launch & walkthrough
+Check out the live site for the full interactive experience, and explore the LinkedIn article to see a video demo showcasing all animations and audio features in action
+
+---
 ## 🚀 Features
 
 - **Scroll-Based Animations:** Dynamic, GSAP-powered animations triggered by scrolling for a highly engaging user experience.
