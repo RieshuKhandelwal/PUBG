@@ -355,7 +355,12 @@ const NavBar = () => {
                 id="product-button"
                 title="Home"
                 rightIcon={<TiLocationArrow />}
-                containerClass="bg-gradient-to-r from-blue-400 to-cyan-500 hover:from-blue-300 hover:to-cyan-400 md:flex hidden items-center justify-center gap-1 transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-blue-400/30 text-white font-semibold"
+                containerClass="md:flex hidden items-center justify-center gap-1 transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-blue-400/30 text-white font-semibold"
+                style={{
+                  background: "linear-gradient(180deg, #FF9933 33%, #FFFFFF 34% 66%, #138808 67%)",
+                  color: "#092047", // optimal contrast for text/icons
+                  border: "2px solid #092047"
+                }}
                 onClick={handleHomeButtonClick}
                 onMouseEnter={() => handleHomeButtonHover(true)}
                 onMouseLeave={() => handleHomeButtonHover(false)}

@@ -52,7 +52,7 @@ const FloatingImage = () => {
   return (
     <div id="story" className="min-h-dvh w-screen bg-black text-blue-50">
       <div className="flex size-full flex-col items-center py-10 pb-24">
-        <p className="font-general text-sm uppercase md:text-[10px]">
+        <p className="font-general text-lg uppercase md:text-[16px]">
           the multiversal aespa world
         </p>
 
@@ -60,6 +60,7 @@ const FloatingImage = () => {
           <AnimatedTitle
             title="the st<b>o</b>ry of <br /> a hidden real<b>m</b>"
             containerClass="mt-5 pointer-events-none mix-blend-difference relative z-10"
+            
           />
 
           <div className="story-img-container">

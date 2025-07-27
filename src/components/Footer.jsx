@@ -107,7 +107,7 @@ const Footer = () => {
   }
 
   return (
-    <footer className="w-screen bg-[#5542ff] py-4 text-black relative overflow-hidden">
+    <footer className="w-screen bg-gradient-to-l from-orange-400 via-yellow-500 to-blue-500 py-4 text-black relative overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-2 left-10 w-1 h-1 bg-white/20 rounded-full animate-pulse"></div>
         <div

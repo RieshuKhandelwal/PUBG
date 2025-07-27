@@ -227,10 +227,10 @@ const Features = () => {
     <section className="bg-black pb-52">
       <div className="container mx-auto px-3 md:px-10">
         <div className="px-5 py-32">
-          <p className="font-circular-web text-lg text-blue-50">
+          <p className="font-circular-web text-[5rem] text-blue-50" id="glass">
             BATTLEGROUNDS
           </p>
-          <p className="max-w-md font-circular-web text-lg text-blue-50 opacity-50">
+          <p className="max-w-[50vw] m-auto font-circular-web text-lg text-blue-50 opacity-50">
           The battleground gives players tools to create rich and diverse stories. Jump into tense firefights with several expected and unexpected weapons, like frying pans!
           </p>
         </div>
@@ -248,10 +248,10 @@ const Features = () => {
           <BentoCard
             src="videos/feature-1.mp4"
             title={
-              <>
-                Bug<b>a</b>ti
-              </>
-            }
+                <span style={{ letterSpacing: '0.1em', fontWeight: '700', fontFamily: '"Montserrat", sans-serif' }}>
+                  BUGATI
+                </span>
+              }
             description="Experience the exclusive Bugatti collaboration—unlock limited-edition in-game vehicles and cosmetics, and race across new battlegrounds inspired by Bugatti's legendary design."
             isComingSoon
             soundEnabled={soundEnabled}
@@ -266,9 +266,9 @@ const Features = () => {
             <BentoCard
               src="videos/feature-2.mp4"
               title={
-                <>
-                  Spid<b>er m</b>an
-                </>
+                <span style={{ letterSpacing: '0.1em', fontWeight: '700', fontFamily: '"Montserrat", sans-serif' }}>
+                  SPIDERMAN
+                </span>
               }
               description="Swing into action as Spider-Man—use web-slinging mechanics to traverse dynamic battlegrounds, unlock exclusive suits, and team up for epic superhero missions."
               isComingSoon
@@ -283,9 +283,9 @@ const Features = () => {
             <BentoCard
               src="videos/feature-3.mp4"
               title={
-                <>
-                  Lam<b>or</b>gini
-                </>
+                <span style={{ fontWeight: '700', fontFamily: '"Montserrat", sans-serif' }}>
+                  LAMBORGINI
+                </span>
               }
               description="Unleash speed and style with the Lamborghini collect limited-edition skins inspired by the iconic supercar brand."
               isComingSoon
@@ -300,9 +300,9 @@ const Features = () => {
             <BentoCard
               src="videos/feature-4.mp4"
               title={
-                <>
-                  F<b>A</b>MSS
-                </>
+                <span style={{ fontWeight: '700', fontFamily: '"Montserrat", sans-serif' }}>
+                  FAMSS
+                </span>
               }
               description="Unleash your wild side with the Animal Mecha Style Set—exclusive futuristic animal-inspired armor to dominate the battleground in style."
               isComingSoon
@@ -314,14 +314,24 @@ const Features = () => {
           </BentoTilt>
 
           <BentoTilt className="bento-tilt_2">
-            <div className="flex size-full flex-col justify-between bg-violet-300 p-5">
-              <h1 className="bento-title special-font max-w-64 text-black">
-                M<b>o</b>re co<b>m</b>ing s<b>o</b>on.
-              </h1>
+  <div className="flex size-full flex-col justify-between p-5 rounded-lg" 
+       style={{ background: 'linear-gradient(135deg, #f8f9fa, #d1e7dd)' }}>
+       
+    <h1
+      className="bento-title special-font max-w-64"
+      style={{
+        fontFamily: '"Montserrat", sans-serif',
+        color: '#0f5132',
+        letterSpacing: '0.15em',
+        fontWeight: '700',
+        textShadow: '0 0 6px rgba(15, 81, 50, 0.7)'
+      }}
+    >
+      More <b>coming</b> soon...
+    </h1>
+  </div>
+</BentoTilt>
 
-              <TiLocationArrow className="m-5 scale-[5] self-end" />
-            </div>
-          </BentoTilt>
 
           <BentoTilt className="bento-tilt_2">
             <BentoCard

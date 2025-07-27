@@ -255,13 +255,13 @@ const Hero = () => {
           />
         </div>
 
-        <h1 className="special-font hero-heading absolute bottom-5 right-5 z-40 text-blue-75">
+        <h1 className="special-font hero-heading absolute bottom-5 right-5 z-40 text-blue-75 tracking-wide">
           G<b>A</b>MING
         </h1>
 
         <div className="absolute left-0 top-0 z-40 size-full">
           <div className="mt-24 px-5 sm:px-10">
-            <h1 className="special-font hero-heading text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-yellow-500 to-blue-500">
+            <h1 className="special-font hero-heading text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-yellow-500 to-blue-500 tracking-wide">
               redefi<b>n</b>e
             </h1>
 
@@ -280,7 +280,7 @@ const Hero = () => {
         </div>
       </div>
 
-      <h1 className="special-font hero-heading absolute bottom-5 right-5 z-40 text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-yellow-500 to-blue-500">
+      <h1 className="special-font hero-heading absolute bottom-5 right-5 z-40 text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-yellow-500 to-blue-500 tracking-wide">
         G<b>A</b>MING
       </h1>
     </div>
